@@ -14,25 +14,25 @@ function FeedbackForm() {
     const [em_value, setEmValue] = useState('')
     const [nm_value, setNmValue] = useState('')
     const [ph_value, setPhValue] = useState()
+    const [fb_value, setfbValue] = useState('')
 
-    const [checked_val, setCheckBoxChecked] = useState([]);
+    // const [checked_val, setCheckBoxChecked] = useState([]);
     const [error_msg, setErrorMsg] = useState('Please enter the value for the above field');
 
-    const handleOnChange = (isChecked, value) => {
-        let temp = [...checked_val];
-        var pre = value.split('_')[0]
-        if (isChecked) {
-            temp = temp.filter(item => item.split('_')[0] !== pre)
-            temp.push(value);
-            setCheckBoxChecked(temp);
-            return;
-        }
+    // const handleOnChange = (isChecked, value) => {
+    //     let temp = [...checked_val];
+    //     var pre = value.split('_')[0]
+    //     if (isChecked) {
+    //         temp = temp.filter(item => item.split('_')[0] !== pre)
+    //         temp.push(value);
+    //         setCheckBoxChecked(temp);
+    //         return;
+    //     }
 
-        setCheckBoxChecked(temp.filter(item => item !== value));
-    };
+    //     setCheckBoxChecked(temp.filter(item => item !== value));
+    // };
 
 
-    
     const formSubmit = (e) =>{
         e.preventDefault();
 
@@ -50,7 +50,8 @@ function FeedbackForm() {
                 "email": em_value,
                 "name": nm_value,
                 "phone": ph_value,
-                "checkbox_values": checked_val,
+                "feedback": fb_value,
+                // "checkbox_values": checked_val,
             };
             
             existingEntries.push(entry);
@@ -143,6 +144,17 @@ function FeedbackForm() {
                                 </Alert>
                             </Col>
                             <Col></Col>
+                            <Col>
+                                
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label className='required-field'>Feedback </Form.Label>
+                                    <Form.Control type="text" required placeholder="Please write your feedback" value={fb_value} onChange={e => setfbValue(e.target.value)} />
+                                    
+                                </Form.Group>
+                                <Alert variant='danger' id='feedback_er'>
+                                    &#9432;{error_msg}
+                                </Alert>
+                            </Col>
                         </Row>
                         <Row>
 

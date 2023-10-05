@@ -12,7 +12,7 @@ import Table from 'react-bootstrap/Table';
 function Submissions() {
     const allEntries = JSON.parse(localStorage.getItem("allEntries"));
     const [displayDetail, setDisplay] = useState(false);
-    const [singleEntry, setSingleEntry] = useState({'name': '', 'email': '','phone': '', 'checkbox_values':[]})
+    const [singleEntry, setSingleEntry] = useState({'name': '', 'email': '','phone': '', 'feedback': '' })
     
 
     useEffect(() => {
@@ -26,14 +26,7 @@ function Submissions() {
         }
     },[]);
 
-    const handleCheckVal = (ty,entry) =>{
-        var val =''
-        if (entry['checkbox_values'].length >0 ){
-            val = entry['checkbox_values'].filter(item => item.split('_')[0] === ty)[0]
-            val = val.split('_')[1]
-        }
-        return val
-    }
+
     const singleEntryForm = ()=>{
         return(
             <Container>
@@ -44,7 +37,7 @@ function Submissions() {
                     </Card.Header>
                     <Card.Body>
                         <Row>
-                            <Col>Customer Name</Col>
+                            <Col>Name</Col>
                             <Col>{singleEntry['name']}</Col>
                         </Row>
                         <Row>
@@ -54,6 +47,10 @@ function Submissions() {
                         <Row>
                             <Col>Phone</Col>
                             <Col>{singleEntry['phone']}</Col>
+                        </Row>
+                        <Row>
+                            <Col>FeedBack</Col>
+                            <Col>{singleEntry['FeedBack']}</Col>
                         </Row>
                         
                     </Card.Body>
